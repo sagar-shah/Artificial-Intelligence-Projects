@@ -4,7 +4,7 @@ DISCLAIMER:
 
 Goal:
 
-Implement the fastest possible N-queens algorithm that gives a valid solution for the largest value of N given 1 minute of execution time.
+Implement the fastest possible N-queens algorithm that gives a valid solution for the largest value of N given 1 minute of execution time. The nrooks-final.py contains code for both n-rooks as well as n-queens.
 
 Other:
 Code also includes other tasks that were required for the assignment. Details for these tasks are given in the pdf titled a0.pdf.

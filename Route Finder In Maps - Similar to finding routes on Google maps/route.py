@@ -140,110 +140,6 @@ class Map:
             self.adj[cityMapping.get(rs.firstCity)].append(rs)
 
 
-    # def clearVisited(self):
-    #     for i in range(0,noOfCities):
-    #         self.visited[i] = 0
-
-    # def Bfs(self,startCity, endCity, routingOption):
-    #     q = Queue.Queue(maxsize=0)
-    #     q.put(startCity)
-    #     # distance = 0
-    #     # distanceArray = [0]*noOfCities
-    #     # tempDistanceArray = [0]*noOfCities
-    #
-    #     while not q.empty():
-    #         node = q.get()
-    #         if self.visited[cityMapping[node]] == 1:
-    #             # if node == endCity:
-    #             #     tempDistanceArray[cityMapping[node]] =
-    #             continue
-    #
-    #         # if node!=endCity and (routingOption == "distance" or routingOption== "segments"):
-    #         #     distanceArray = tempDistanceArray
-    #         #     tempDistanceArray = [0] * noOfCities
-    #         print node, " "
-    #         self.visited[cityMapping[node]] = 1
-    #         if node == endCity and routingOption == "segments":
-    #             break
-    #
-    #         neighbours = self.adj[cityMapping[node]]
-    #         for temp in neighbours:
-    #             # if temp.firstCity == node:
-    #             #     sourceCity = temp.firstCity
-    #             #     destinationCity = temp.secondCity
-    #             # else:
-    #             #     sourceCity = temp.secondCity
-    #             #     destinationCity = temp.firstCity
-    #             # if self.visited[cityMapping[destinationCity]] == 0:
-    #             #     tempDistanceArray[cityMapping[destinationCity]] = distanceArray[cityMapping[sourceCity]] + temp.length
-    #             if self.visited[cityMapping[temp.secondCity]] == 0:
-    #                 q.put(temp.secondCity)
-    #
-    #     self.clearVisited()
-
-    # def BfsDfs(self,startCity, endCity, routingOption, routingAlgorithm, maxDepth):
-    #     if routingAlgorithm == "Bfs":
-    #         index = 0
-    #     else:
-    #         index = -1
-    #
-    #     depth = 0
-    #
-    #     for c in citiesList:
-    #         c.depth = 0
-    #
-    #     path = [None]*noOfCities
-    #
-    #     distance = [sys.maxint]*noOfCities
-    #     distance[cityMapping[startCity]] = 0
-    #
-    #     visited = [0]*noOfCities
-    #
-    #     visited[cityMapping[startCity]] = 1
-    #     # currentCityNo = (0, cityMapping[startCity])
-    #
-    #     fringe = []
-    #     fringe.append(cityMapping[startCity])
-    #
-    #     while len(fringe) > 0:
-    #         neighbours = self.adj[fringe.pop(index)]
-    #         for n in neighbours:
-    #             if visited[cityMapping[n.secondCity]] == 0:
-    #                 citiesList[cityMapping[n.secondCity]].depth = citiesList[cityMapping[n.firstCity]].depth + 1
-    #
-    #         for temp in neighbours:
-    #             # citiesList[cityMapping[temp.secondCity]].depth = depth
-    #             # if temp[1] > maxDepth:
-    #             #     print "Max depth reached. Depth= ", temp[1], "Max depth", maxDepth
-    #             #     return False
-    #             # if citiesList[cityMapping[temp.secondCity]].depth == 95:
-    #             #     for f in fringe:
-    #             #         try:
-    #             #             print citiesList[f].name, citiesList[f].depth
-    #             #         except:
-    #             #             print f
-    #             #     raw_input(int)
-    #             if citiesList[cityMapping[temp.secondCity]].depth > maxDepth:
-    #                 print "Max depth reached. Depth= ",citiesList[cityMapping[temp.secondCity]].depth , "Max depth", maxDepth
-    #                 continue
-    #                 # return False
-    #             if visited[cityMapping[temp.secondCity]] == 0:
-    #                 # allExplored = False
-    #                 visited[cityMapping[temp.secondCity]] = 1
-    #                 path[cityMapping[temp.secondCity]] = temp.firstCity
-    #                 # print temp.secondCity
-    #                 if cityMapping[temp.secondCity] == cityMapping[endCity]:
-    #                     # print "Depth before printing final path ",depth
-    #                     self.printPath(path, startCity, endCity)
-    #                     return True
-    #
-    #                 fringe.append(cityMapping[temp.secondCity])
-    #         # if allExplored:
-    #         #         depth -= 1
-    #         # else:
-    #         #     depth += 1
-    #     return False
-
     def BfsDfs(self,startCity, endCity, routingOption, routingAlgorithm, maxDepth):
         if routingAlgorithm == "Bfs":
             index = 0
@@ -283,17 +179,6 @@ class Map:
 
 
             for temp in neighbours:
-                # citiesList[cityMapping[temp.secondCity]].depth = depth
-                # if temp[1] > maxDepth:
-                #     print "Max depth reached. Depth= ", temp[1], "Max depth", maxDepth
-                #     return False
-                # if citiesList[cityMapping[temp.secondCity]].depth == 95:
-                #     for f in fringe:
-                #         try:
-                #             print citiesList[f].name, citiesList[f].depth
-                #         except:
-                #             print f
-                #     raw_input(int)
                 if citiesList[cityMapping[temp.secondCity]].depth > maxDepth:
                     # print "Max depth reached. Depth= ", citiesList[cityMapping[temp.secondCity]].depth, "Max depth", maxDepth
                     continue
@@ -309,138 +194,9 @@ class Map:
                         return True
 
                     fringe.append((cityMapping[temp.secondCity],citiesList[cityMapping[temp.secondCity]].depth ))
-                # else:
-                #     if citiesList[cityMapping[temp.secondCity]].depth > level:
-                #         fringe.append((cityMapping[temp.secondCity], level))
-
-            # if allExplored:
-            #         depth -= 1
-            # else:
-            #     depth += 1
+                
         return False
 
-    # def DfsDjikstra(self,startCity, endCity, routingOption):  #Referred online for Djikstra's algorithm concept. Code implemented without referencing any pseudocode.
-    #     path = [None]*noOfCities
-    #
-    #     distance = [sys.maxint]*noOfCities
-    #     distance[cityMapping[startCity]] = 0
-    #
-    #     visited = set()
-    #
-    #     currentCityNo = self.getMinDistance(distance,visited)
-    #     visited.add(currentCityNo[1])
-    #     fringe = []
-    #     fringe.append(cityMapping[startCity])
-    #     while (currentCityNo[1] != cityMapping[endCity]):
-    #         # while i < no:
-    #         # node = fringe.pop()
-    #         # neighbours = self.adj[node]
-    #         for temp in self.adj[fringe.pop()]:
-    #             # visited.add(temp.firstCity)
-    #             if routingOption == 'segments':
-    #                 minify = temp.segmentLength
-    #             if routingOption == 'distance':
-    #                 minify = temp.length
-    #             if routingOption == 'time':
-    #                 minify = temp.time
-    #             if routingOption == 'scenic':
-    #                 minify = temp.highwayDistance
-    #
-    #             if(cityMapping[temp.secondCity] not in visited):
-    #                 print "lhs",distance[cityMapping[temp.secondCity]]
-    #                 print "rhs", distance[currentCityNo[1]] + minify
-    #                 if distance[cityMapping[temp.secondCity]] > distance[currentCityNo[1]] + minify:
-    #                     distance[cityMapping[temp.secondCity]] = distance[currentCityNo[1]] + minify
-    #                     print "path ",temp.firstCity
-    #                     path[cityMapping[temp.secondCity]] = temp.firstCity
-    #             fringe.append(cityMapping[temp.secondCity])
-    #             # x = time.clock()
-    #         currentCityNo = self.getMinDistance(distance,visited)
-    #         # print time.clock() - x , "seconds"
-    #         visited.add(currentCityNo[1])
-    #
-    #     print path
-    #     print distance
-    #     self.printPath(path,distance,startCity,endCity)
-
-
-    # def BfsDfs(self,startCity, endCity, routingOption):  #Referred online for Djikstra's algorithm concept. Code implemented without referencing any pseudocode.
-    #     path = [None]*noOfCities
-    #
-    #     distance = [sys.maxint]*noOfCities
-    #     distance[cityMapping[startCity]] = 0
-    #
-    #     visited = set()
-    #
-    #     currentCityNo = self.getMinDistance(distance,visited)
-    #     visited.add(currentCityNo[1])
-    #     fringe = []
-    #     fringe.append(cityMapping[startCity])
-    #     while (currentCityNo[1] != cityMapping[endCity]):
-    #         # while i < no:
-    #         # node = fringe.pop()
-    #         # neighbours = self.adj[node]
-    #         for temp in self.adj[fringe.pop()]:
-    #             # visited.add(temp.firstCity)
-    #             if routingOption == 'segments':
-    #                 minify = temp.segmentLength
-    #             if routingOption == 'distance':
-    #                 minify = temp.length
-    #             if routingOption == 'time':
-    #                 minify = temp.time
-    #             if routingOption == 'scenic':
-    #                 minify = temp.highwayDistance
-    #
-    #             if(cityMapping[temp.secondCity] not in visited):
-    #                 print "lhs",distance[cityMapping[temp.secondCity]]
-    #                 print "rhs", distance[currentCityNo[1]] + minify
-    #                 if distance[cityMapping[temp.secondCity]] > distance[currentCityNo[1]] + minify:
-    #                     distance[cityMapping[temp.secondCity]] = distance[currentCityNo[1]] + minify
-    #                     print "path ",temp.firstCity
-    #                     path[cityMapping[temp.secondCity]] = temp.firstCity
-    #             fringe.append(cityMapping[temp.secondCity])
-    #             # x = time.clock()
-    #         currentCityNo = self.getMinDistance(distance,visited)
-    #         # print time.clock() - x , "seconds"
-    #         visited.add(currentCityNo[1])
-    #
-    #     print path
-    #     print distance
-    #     self.printPath(path,distance,startCity,endCity)
-
-    # def BfsDjikstra(self,startCity, endCity, routingOption):  #Referred online for Djikstra's algorithm concept. Code implemented without referencing any pseudocode.
-    #     path = [None]*noOfCities
-    #
-    #     distance = [sys.maxint]*noOfCities
-    #     distance[cityMapping[startCity]] = 0
-    #
-    #     visited = set()
-    #
-    #     currentCityNo = self.getMinDistance(distance,visited)
-    #     visited.add(currentCityNo[1])
-    #     while (currentCityNo[1] != cityMapping[endCity]):
-    #         # while i < no:
-    #         neighbours = self.adj[currentCityNo[1]]
-    #         for temp in neighbours:
-    #             if routingOption == 'segments':
-    #                 minify = temp.segmentLength
-    #             if routingOption == 'distance':
-    #                 minify = temp.length
-    #             if routingOption == 'time':
-    #                 minify = temp.time
-    #             if routingOption == 'scenic':
-    #                 minify = temp.highwayDistance
-    #
-    #             if(cityMapping[temp.secondCity] not in visited):
-    #                 if distance[cityMapping[temp.secondCity]] > distance[currentCityNo[1]] + minify:
-    #                     distance[cityMapping[temp.secondCity]] = distance[currentCityNo[1]] + minify
-    #                     path[cityMapping[temp.secondCity]] = temp.firstCity
-    #         currentCityNo = self.getMinDistance(distance,visited)
-    #         visited.add(currentCityNo[1])
-    #
-    #     print path
-    #     print distance
-    #     self.printPath(path,distance,startCity,endCity)
 
     def printPath(self,path,startCity,endCity):
         finalPath = []
@@ -478,93 +234,13 @@ class Map:
         return distanceTravelled,startCity,ec  #ony used for qt 5
 
 
-    # def getMinDistance(self,distance,visited):
-    #     min = sys.maxint
-    #     # print distance
-    #     for i in set(range(0,len(distance))) - visited:
-    #         # if i not in visited:
-    #         #     min = distance[i]
-    #         #     node = i
-    #         if distance[i] <= min:
-    #             min = distance[i]
-    #             node = i
-    #
-    #     return min, node
-
-    # def Dfs(self,startCity, endCity, routingOption, depth):
-    #     path = []
-    #     distance = [sys.maxint] * noOfCities
-    #     distance[cityMapping[startCity]] = 0
-    #     flag = False
-    #
-    #     tuple = self.DfsHelper(startCity, endCity, routingOption, flag, path, distance,depth)
-    #     if tuple[0] == True and tuple[1] == 'found':
-    #         print tuple[2]
-    #     self.clearVisited()
-    #     return tuple
-    #
-    # def DfsHelper(self,node, endCity, routingOption, flag, path, distance,depth):
-    #     self.visited[cityMapping[node]] = 1
-    #
-    #     path.append(node)
-    #     print node
-    #     if node == endCity:
-    #         return True, 'found', path
-    #     if depth <= 0:
-    #         return True, 'not found', path
-    #
-    #     neighbours = self.adj[cityMapping[node]]
-    #     # min = sys.maxint
-    #     # for s in neighbours:
-    #     #     if self.visited[cityMapping[s.secondCity]] == 0 and distance[cityMapping[node]] + s.length < min:
-    #     #         min = distance[cityMapping[node]] + s.length
-    #
-    #     if routingOption == 'distance':
-    #         neighbours.sort(key=lambda x: x.length)   # Code snippet for sorting from http://stackoverflow.com/questions/403421/how-to-sort-a-list-of-objects-in-python-based-on-an-attribute-of-the-objects
-    #     if routingOption == 'time':
-    #         neighbours.sort(key=lambda x: x.time)
-    #     if routingOption == 'scenic':
-    #         neighbours.sort(key=lambda x: x.highwayDistance)
-    #
-    #     for s in neighbours:
-    #         if self.visited[cityMapping[s.secondCity]] == 0:
-    #             tuple = self.DfsHelper(s.secondCity, endCity, routingOption, flag, path, distance, depth -1 )
-    #             if tuple is not None and tuple[0]:
-    #                 return tuple
-
-
-
+    
     def Ids(self,startCity, endCity, routingOption, routingAlgorithm):
         for i in range(0,len(citiesList)):
             found = self.BfsDfs(startCity,endCity,routingOption,routingAlgorithm,i)
             if found:
                 break
-    # def BfsScenic(self,startCity, endCity, routingOption):
-    #     path = [None] * noOfCities
-    #
-    #     distance = [sys.maxint] * noOfCities
-    #     distance[cityMapping[startCity]] = 0
-    #     distanceHighway = [sys.maxint] * noOfCities
-    #
-    #     visited = set()
-    #
-    #     currentCityNo = (0,cityMapping[startCity])
-    #     visited.add(cityMapping[startCity])
-    #
-    #     while (currentCityNo[1] != cityMapping[endCity]):
-    #     # while i < no:
-    #         neighbours = self.adj[currentCityNo[1]]
-    #         for temp in neighbours:
-    #             if(cityMapping[temp.secondCity] not in visited):
-    #                 if distance[cityMapping[temp.secondCity]] > distance[currentCityNo[1]] + temp.length:
-    #                     # if temp.category == 'scenic':
-    #                     distance[cityMapping[temp.secondCity]] = distance[currentCityNo[1]] + temp.length
-    #                     path[cityMapping[temp.secondCity]] = temp.firstCity
-    #         currentCityNo = self.getMinDistance(distance,visited)
-    #         visited.add(currentCityNo[1])
-    #     self.clearVisited()
-    #     print path
-    #     print distance
+    
     def astar(self,startCity, endCity, routingOption, routingAlgorithm):  #Algorithm used similar to Djikstra's
         if(startCity == endCity):
             return
